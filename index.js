@@ -5,6 +5,7 @@ import LinearGradientWindows from "./index.windows.js";
 
 export const LinearGradient = Platform.OS === "ios"
   ? LinearGradientIos : Platform.OS === "android"
+  ? LinearGradientAndroid : Platform.OS === "harmony"
   ? LinearGradientAndroid : LinearGradientWindows;
 
 export default LinearGradient;

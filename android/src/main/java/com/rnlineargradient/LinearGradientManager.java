@@ -59,8 +59,8 @@ public class LinearGradientManager extends LinearGradientManagerSpec<LinearGradi
     }
 
     @Override
-    @ReactProp(name = PROP_USE_ANGLE, defaultBoolean = false)
-    public void setUseAngle(LinearGradientView gradientView, boolean useAngle) {
+    @ReactProp(name = PROP_USE_ANGLE, defaultFloat = 45.0f)
+    public void setUseAngle(LinearGradientView gradientView, float angle) {
         gradientView.setUseAngle(useAngle);
     }
 

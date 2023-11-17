@@ -7,11 +7,13 @@
   "files": [
     "android",
     "ios",
+    "harmony",
     "src",
     "windows",
     "index.android.js",
     "index.d.ts",
     "index.ios.js",
+    "index.harmony.js",
     "index.windows.js",
     "RNLinearGradient.podspec"
   ],

@@ -1,0 +1,9 @@
+{
+    "module": {
+        "name": "linear_gradient",
+        "type": "har",
+        "deviceTypes": [
+            "default"
+        ]
+    }
+}
