@@ -1,12 +1,12 @@
 {
   "name": "@react-native-oh-library/react-native-linear-gradient",
-  "version": "2.8.3-0.0.1",
+  "version": "3.0.0-alpha.1-0.2.4",
   "description": "A <LinearGradient> element for React Native",
+  "main": "index.js",
+  "types": "index.d.ts",
   "harmony": {
     "alias": "react-native-linear-gradient"
   },
-  "main": "index.js",
-  "types": "index.d.ts",
   "files": [
     "android",
     "ios",
@@ -16,7 +16,6 @@
     "index.android.js",
     "index.d.ts",
     "index.ios.js",
-    "index.harmony.js",
     "index.windows.js",
     "RNLinearGradient.podspec"
   ],
@@ -25,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/react-native-linear-gradient/react-native-linear-gradient.git"
+    "url": "https://github.com/react-native-oh-library/react-native-linear-gradient"
   },
   "author": "Brent Vatne <brentvatne@gmail.com> (https://github.com/brentvatne)",
   "contributors": [
