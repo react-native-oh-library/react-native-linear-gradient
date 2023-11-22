@@ -27,11 +27,12 @@
 
 #include <react/renderer/core/ConcreteComponentDescriptor.h>
 #include "ShadowNodes.h"
+
 namespace facebook {
-    namespace react {
+namespace react {
 
-        using RNLinearGradientComponentDescriptor = ConcreteComponentDescriptor<RNLinearGradientShadowNode>;
+using RNLinearGradientComponentDescriptor = ConcreteComponentDescriptor<RNLinearGradientShadowNode>;
 
-    } // namespace react
+} // namespace react
 } // namespace facebook
 #endif
