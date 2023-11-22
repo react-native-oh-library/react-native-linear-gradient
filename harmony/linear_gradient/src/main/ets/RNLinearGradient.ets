@@ -1,4 +1,4 @@
-/**
+/*
  * MIT License
  *
  * Copyright (C) 2021 Huawei Device Co., Ltd.
@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+ 
 import {
     Descriptor,
     ComponentBuilderContext,
