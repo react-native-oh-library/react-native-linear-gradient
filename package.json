@@ -1,6 +1,6 @@
 {
   "name": "react-native-linear-gradient-opneharmony",
-  "version": "3.0.0-alpha.1-0.2.4",
+  "version": "3.0.0-alpha.1-0.3.0",
   "description": "A <LinearGradient> element for React Native",
   "main": "index.js",
   "types": "index.d.ts",
