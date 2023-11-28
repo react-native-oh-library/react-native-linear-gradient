@@ -1,5 +1,5 @@
 {
-  "name": "@react-native-oh-library/react-native-linear-gradient",
+  "name": "react-native-linear-gradient-opneharmony",
   "version": "3.0.0-alpha.1-0.2.4",
   "description": "A <LinearGradient> element for React Native",
   "main": "index.js",
@@ -40,7 +40,9 @@
     "Radek Pietruszewski <radexpl@gmail.com> (https://github.com/radex)"
   ],
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "react-native-linear-gradient": "3.0.0-alpha.1"
+  },
   "devDependencies": {
     "@types/react-native": "^0.70.14",
     "flow-bin": "^0.182.0",
