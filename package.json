@@ -1,5 +1,5 @@
 {
-  "name": "react-native-linear-gradient-opneharmony",
+  "name": "@react-native-oh-tpl/react-native-linear-gradient",
   "version": "3.0.0-alpha.1-0.3.0",
   "description": "A <LinearGradient> element for React Native",
   "main": "index.js",
@@ -12,17 +12,10 @@
     "access": "public"
   },
   "files": [
-    "android",
-    "ios",
     "harmony",
     "src",
-    "windows",
-    "index.android.js",
     "index.d.ts",
-    "index.ios.js",
-    "index.harmony.js",
-    "index.windows.js",
-    "RNLinearGradient.podspec"
+    "index.harmony.js"
   ],
   "scripts": {
     "flow": "flow check"
