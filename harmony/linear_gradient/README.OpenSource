@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "react-native-linear-gradient",
+        "License": "MIT License",
+        "License File": "https://github.com/react-native-linear-gradient/react-native-linear-gradient/blob/main/LICENSE",
+        "Version Number": "3.0.0-alpha.1",
+        "Owner" : "Brent Vatne <brentvatne@gmail.com>"
+        "Upstream URL": "https://github.com/react-native-linear-gradient/react-native-linear-gradient",
+        "Description": "A <LinearGradient> element for React Native"
+    }
+]
