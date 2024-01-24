@@ -2,11 +2,12 @@
   "license": "ISC",
   "types": "",
   "devDependencies": {
-    "rnoh": "file:../rnoh"
   },
   "name": "rnoh-linear-gradient",
   "description": "Native part of react-harmony-linear-gradient",
   "main": "index.ets",
   "version": "0.0.1",
-  "dependencies": {}
+  "dependencies": {
+    "rnoh": "file:../rnoh"
+  }
 }

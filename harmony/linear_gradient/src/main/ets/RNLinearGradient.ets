@@ -94,7 +94,7 @@ export struct RNLinearGradient {
         let colorArr: ResourceColor[] = [];
         let locationArr: number[] =[];
         for (let i = 0; i < this.descriptor.props.colors.length; i ++) {
-            colorArr.push(convertColorSegmentsToString(this.descriptor.props.colors[i].color))
+            colorArr.push(convertColorSegmentsToString(this.descriptor.props.colors[i].color) as ResourceColor)
         }
         if (this.descriptor.props.locations) {
             for (let i = 0; i < this.descriptor.props.locations.length; i ++) {
