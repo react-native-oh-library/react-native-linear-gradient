@@ -1,6 +1,6 @@
 {
   "name": "@react-native-oh-tpl/react-native-linear-gradient",
-  "version": "3.0.0-alpha.1-0.3.5",
+  "version": "3.0.0-alpha.1-0.3.6",
   "description": "A <LinearGradient> element for React Native",
   "main": "index.js",
   "types": "index.d.ts",
@@ -45,10 +45,5 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
-  },
-  "codegenConfig": {
-    "name": "RNLinearGradientSpec",
-    "type": "components",
-    "jsSrcsDir": "src"
   }
 }
