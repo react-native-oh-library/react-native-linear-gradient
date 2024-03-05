@@ -26,34 +26,51 @@
 #define HARMONY_LINEAR_GRADIENT_SRC_MAIN_CPP_LINEARGRADIENTPACKAGE_H
 
 #include "RNOH/Package.h"
+#include "RNOHCorePackage/ComponentInstances/ViewComponentInstance.h"
 #include "ComponentDescriptors.h"
 #include "LinearGradientJSIBinder.h"
 #include "LinearGradientNapiBinder.h"
+#include "LinearGradientComponentInstance.h"
 
 namespace rnoh {
 
-class LinearGradientPackage : public Package {
-  public:
-      LinearGradientPackage(Package::Context ctx) : Package(ctx) {}
+    class LinearGradientPackageComponentInstanceFactoryDelegate : public ComponentInstanceFactoryDelegate {
+    public:
+        using ComponentInstanceFactoryDelegate::ComponentInstanceFactoryDelegate;
 
-      std::vector<facebook::react::ComponentDescriptorProvider> createComponentDescriptorProviders() override 
-      {
-          return {
-              facebook::react::concreteComponentDescriptorProvider<facebook::react::RNLinearGradientComponentDescriptor>()
-          };
-      }
+        ComponentInstance::Shared create(ComponentInstanceFactoryContext ctx) override {
+            if (ctx.componentName == "RNLinearGradient") {
+                return std::make_shared<LinearGradientComponentInstance>(m_ctx, ctx.tag);
+            }
+            return nullptr;
+        }
+    };
+
+    class LinearGradientPackage : public Package {
+    public:
+        LinearGradientPackage(Package::Context ctx) : Package(ctx) {}
     
-      ComponentJSIBinderByString createComponentJSIBinderByName() override
-      {
-          return {{"RNLinearGradient",std::make_shared<LinearGradientJSIBinder>()},
-      
-          };
-      }
-    
-      ComponentNapiBinderByString createComponentNapiBinderByName() override
-      {
-          return {{"RNLinearGradient", std::make_shared<LinearGradientNapiBinder>()},};
-      }
-};
+        ComponentInstanceFactoryDelegate::Shared createComponentInstanceFactoryDelegate() override {
+            return std::make_shared<LinearGradientPackageComponentInstanceFactoryDelegate>(m_ctx);
+        }
+
+        std::vector<facebook::react::ComponentDescriptorProvider> createComponentDescriptorProviders() override {
+            return {facebook::react::concreteComponentDescriptorProvider<
+                facebook::react::RNLinearGradientComponentDescriptor>()};
+        }
+
+        ComponentJSIBinderByString createComponentJSIBinderByName() override {
+            return {
+                {"RNLinearGradient", std::make_shared<LinearGradientJSIBinder>()},
+
+            };
+        }
+
+        ComponentNapiBinderByString createComponentNapiBinderByName() override {
+            return {
+                {"RNLinearGradient", std::make_shared<LinearGradientNapiBinder>()},
+            };
+        }
+    };
 } // namespace rnoh
 #endif
