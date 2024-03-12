@@ -9,55 +9,49 @@
 
 namespace rnoh {
     LinearGradientComponentInstance::LinearGradientComponentInstance(Context context, facebook::react::Tag tag)
-        : ComponentInstance(std::move(context), tag) {}
+        : CppComponentInstance(std::move(context), tag) {}
 
     void LinearGradientComponentInstance::insertChild(ComponentInstance::Shared childComponentInstance,
                                                       std::size_t index) {
+        CppComponentInstance::insertChild(childComponentInstance, index);
         m_stackNode.insertChild(childComponentInstance->getLocalRootArkUINode(), index);
     }
+
+    void LinearGradientComponentInstance::removeChild(ComponentInstance::Shared childComponentInstance) {
+        CppComponentInstance::removeChild(childComponentInstance);
+        m_stackNode.removeChild(childComponentInstance->getLocalRootArkUINode());
+    };
 
     LinearGradientStackNode &LinearGradientComponentInstance::getLocalRootArkUINode() { return m_stackNode; }
 
     void LinearGradientComponentInstance::setProps(facebook::react::Props::Shared props) {
-        if (auto p = std::dynamic_pointer_cast<const facebook::react::RNLinearGradientProps>(props)) {
-            this->getNapiProps(props);
-            this->getLinearGradient();
-            for (auto color : p->colors) {
-                auto colorComponents = colorComponentsFromColor(color);
-                uint32_t red = static_cast<uint32_t>(colorComponents.red * 255) & 0xFF;
-                uint32_t green = static_cast<uint32_t>(colorComponents.green * 255) & 0xFF;
-                uint32_t blue = static_cast<uint32_t>(colorComponents.blue * 255) & 0xFF;
-                uint32_t alpha = 0xFF; // static_cast<uint32_t>(colorComponents.alpha * 255) & 0xFF; something is off
-                                       // with the alpha by default. We may need to get color from rawProps.
-                auto colorValue = (alpha << 24) | (red << 16) | (green << 8) | blue;
-                LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> color: " << std::to_string(colorValue);
-            }
-            for (auto location : p->locations) {
-                LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> location: " << location;
-            }
-            LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angle: " << p->angle;
-
-            LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> useAngle: " << p->useAngle;
-            LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> startPoint: " << p->startPoint.x << ", "
-                      << p->startPoint.y;
-            LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> endPoint: " << p->endPoint.x << ", "
-                      << p->endPoint.y;
-            LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angleCenter: " << p->angleCenter.x << ", "
-                      << p->angleCenter.y;
-            this->getLocalRootArkUINode().setLinearGradient(this->colors, this->stops, static_cast<float>(this->angle),
-                                                            ARKUI_LINEAR_GRADIENT_DIRECTION_LEFT, false);
+        CppComponentInstance::setProps(props);
+        auto linearGradientProps = std::dynamic_pointer_cast<const facebook::react::RNLinearGradientProps>(props);
+        if (linearGradientProps == nullptr) {
+            return;
         }
-    }
+        this->colors = linearGradientProps->colors;
+        this->angle = linearGradientProps->angle;
+        this->useAngle = linearGradientProps->useAngle;
+        this->locations = linearGradientProps->locations;
+        this->startPoint = linearGradientProps->startPoint;
+        this->endPoint = linearGradientProps->endPoint;
+        this->angleCenter = linearGradientProps->angleCenter;
+        this->getLinearGradient();
+        for (auto location : linearGradientProps->locations) {
+            LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> location: " << location;
+        }
+        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angle: " << linearGradientProps->angle;
 
-    void LinearGradientComponentInstance::getNapiProps(facebook::react::Props::Shared props) {
-        auto p = std::dynamic_pointer_cast<const facebook::react::RNLinearGradientProps>(props);
-        this->colors = p->colors;
-        this->angle = p->angle;
-        this->useAngle = p->useAngle;
-        this->locations = p->locations;
-        this->startPoint = p->startPoint;
-        this->endPoint = p->endPoint;
-        this->angleCenter = p->angleCenter;
+        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> useAngle: " << linearGradientProps->useAngle;
+        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> startPoint: "
+                  << linearGradientProps->startPoint.x << ", " << linearGradientProps->startPoint.y;
+        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> endPoint: " << linearGradientProps->endPoint.x
+                  << ", " << linearGradientProps->endPoint.y;
+        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angleCenter: "
+                  << linearGradientProps->angleCenter.x << ", " << linearGradientProps->angleCenter.y;
+        this->getLocalRootArkUINode().setLinearGradient(this->colors, this->stops, static_cast<float>(this->angle),
+                                                        ARKUI_LINEAR_GRADIENT_DIRECTION_LEFT, false);
     }
 
     void LinearGradientComponentInstance::getLinearGradient() {

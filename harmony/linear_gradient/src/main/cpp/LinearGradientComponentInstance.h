@@ -7,12 +7,12 @@
 #ifndef HARMONY_LINEARGRADIENTCOMPONENTINSTANCE_H
 #define HARMONY_LINEARGRADIENTCOMPONENTINSTANCE_H
 
-#include "RNOH/ComponentInstance.h"
+#include "RNOH/CppComponentInstance.h"
 #include "LinearGradientStackNode.h"
 #include "Props.h"
 
 namespace rnoh {
-    class LinearGradientComponentInstance : public ComponentInstance {
+    class LinearGradientComponentInstance : public CppComponentInstance {
     private:
         LinearGradientStackNode m_stackNode;
         std::vector<facebook::react::SharedColor> colors;
@@ -29,6 +29,8 @@ namespace rnoh {
         LinearGradientComponentInstance(Context context, facebook::react::Tag tag);
 
         void insertChild(ComponentInstance::Shared childComponentInstance, std::size_t index) override;
+
+        void removeChild(ComponentInstance::Shared childComponentInstance) override;
 
         LinearGradientStackNode &getLocalRootArkUINode() override;
 

@@ -21,13 +21,14 @@ namespace rnoh {
         std::vector<uint32_t> colorsInput;
         std::vector<float> stopsInput = stops;
         for (auto color : colors) {
-            auto colorComponents = colorComponentsFromColor(color);
-            uint32_t red = static_cast<uint32_t>(colorComponents.red * 255) & 0xFF;
-            uint32_t green = static_cast<uint32_t>(colorComponents.green * 255) & 0xFF;
-            uint32_t blue = static_cast<uint32_t>(colorComponents.blue * 255) & 0xFF;
-            uint32_t alpha = 0xFF; // static_cast<uint32_t>(colorComponents.alpha * 255) & 0xFF; something is off with
-                                   // the alpha by default. We may need to get color from rawProps.
-            auto colorValue = (alpha << 24) | (red << 16) | (green << 8) | blue;
+            uint32_t colorValue = *color;
+//             auto colorComponents = colorComponentsFromColor(color);
+//             uint32_t red = static_cast<uint32_t>(colorComponents.red * 255) & 0xFF;
+//             uint32_t green = static_cast<uint32_t>(colorComponents.green * 255) & 0xFF;
+//             uint32_t blue = static_cast<uint32_t>(colorComponents.blue * 255) & 0xFF;
+//             uint32_t alpha = 0xFF; // static_cast<uint32_t>(colorComponents.alpha * 255) & 0xFF; something is off with
+//                                    // the alpha by default. We may need to get color from rawProps.
+//             auto colorValue = (alpha << 24) | (red << 16) | (green << 8) | blue;
             colorsInput.push_back(colorValue);
         }
         ArkUI_ColorStop colorStop = {colorsInput.data(), stopsInput.data(), static_cast<int>(colorsInput.size())};
