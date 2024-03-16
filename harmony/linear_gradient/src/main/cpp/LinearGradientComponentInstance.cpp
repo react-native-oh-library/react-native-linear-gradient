@@ -8,8 +8,8 @@
 #include <glog/logging.h>
 
 namespace rnoh {
-    LinearGradientComponentInstance::LinearGradientComponentInstance(Context context, facebook::react::Tag tag)
-        : CppComponentInstance(std::move(context), tag) {}
+    LinearGradientComponentInstance::LinearGradientComponentInstance(Context context)
+        : CppComponentInstance(std::move(context)) {}
 
     void LinearGradientComponentInstance::insertChild(ComponentInstance::Shared childComponentInstance,
                                                       std::size_t index) {
@@ -26,7 +26,7 @@ namespace rnoh {
 
     void LinearGradientComponentInstance::setProps(facebook::react::Props::Shared props) {
         CppComponentInstance::setProps(props);
-        auto linearGradientProps = std::dynamic_pointer_cast<const facebook::react::RNLinearGradientProps>(props);
+        auto linearGradientProps = std::dynamic_pointer_cast<const facebook::react::RNLinearGradientProps>();
         if (linearGradientProps == nullptr) {
             return;
         }

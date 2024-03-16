@@ -38,9 +38,9 @@ namespace rnoh {
     public:
         using ComponentInstanceFactoryDelegate::ComponentInstanceFactoryDelegate;
 
-        ComponentInstance::Shared create(ComponentInstanceFactoryContext ctx) override {
+        ComponentInstance::Shared create((ComponentInstance::Context ctx) override {
             if (ctx.componentName == "RNLinearGradient") {
-                return std::make_shared<LinearGradientComponentInstance>(m_ctx, ctx.tag);
+                return std::make_shared<LinearGradientComponentInstance>(ctx);
             }
             return nullptr;
         }

@@ -26,7 +26,7 @@ namespace rnoh {
         
 
     public:
-        LinearGradientComponentInstance(Context context, facebook::react::Tag tag);
+        LinearGradientComponentInstance(Context context);
 
         void insertChild(ComponentInstance::Shared childComponentInstance, std::size_t index) override;
 
