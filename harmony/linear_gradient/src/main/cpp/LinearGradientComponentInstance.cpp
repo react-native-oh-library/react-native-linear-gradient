@@ -26,7 +26,7 @@ namespace rnoh {
 
     void LinearGradientComponentInstance::setProps(facebook::react::Props::Shared props) {
         CppComponentInstance::setProps(props);
-        auto linearGradientProps = std::dynamic_pointer_cast<const facebook::react::RNLinearGradientProps>();
+        auto linearGradientProps = std::dynamic_pointer_cast<const facebook::react::RNLinearGradientProps>(props);
         if (linearGradientProps == nullptr) {
             return;
         }

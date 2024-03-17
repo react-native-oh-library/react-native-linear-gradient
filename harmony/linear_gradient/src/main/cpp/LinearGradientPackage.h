@@ -38,9 +38,9 @@ namespace rnoh {
     public:
         using ComponentInstanceFactoryDelegate::ComponentInstanceFactoryDelegate;
 
-        ComponentInstance::Shared create((ComponentInstance::Context ctx) override {
+        ComponentInstance::Shared create(ComponentInstance::Context ctx) override {
             if (ctx.componentName == "RNLinearGradient") {
-                return std::make_shared<LinearGradientComponentInstance>(ctx);
+                return std::make_shared<LinearGradientComponentInstance>(std::move(ctx));
             }
             return nullptr;
         }
@@ -51,7 +51,7 @@ namespace rnoh {
         LinearGradientPackage(Package::Context ctx) : Package(ctx) {}
     
         ComponentInstanceFactoryDelegate::Shared createComponentInstanceFactoryDelegate() override {
-            return std::make_shared<LinearGradientPackageComponentInstanceFactoryDelegate>(m_ctx);
+            return std::make_shared<LinearGradientPackageComponentInstanceFactoryDelegate>();
         }
 
         std::vector<facebook::react::ComponentDescriptorProvider> createComponentDescriptorProviders() override {
