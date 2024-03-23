@@ -8,7 +8,7 @@ namespace rnoh {
         : ArkUINode(NativeNodeApi::getInstance()->createNode(ArkUI_NodeType::ARKUI_NODE_STACK)) {}
 
     void LinearGradientStackNode::insertChild(ArkUINode &child, std::size_t index) {
-        maybeThrow(NativeNodeApi::getInstance()->addChild(m_nodeHandle, child.getArkUINodeHandle()));
+        maybeThrow(NativeNodeApi::getInstance()->insertChildAt(m_nodeHandle, child.getArkUINodeHandle(), index));
     }
 
     void LinearGradientStackNode::removeChild(ArkUINode &child) {
