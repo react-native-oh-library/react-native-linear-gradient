@@ -11,45 +11,43 @@ namespace rnoh {
     LinearGradientComponentInstance::LinearGradientComponentInstance(Context context)
         : CppComponentInstance(std::move(context)) {}
 
-    void LinearGradientComponentInstance::insertChild(ComponentInstance::Shared childComponentInstance,
-                                                      std::size_t index) {
-        CppComponentInstance::insertChild(childComponentInstance, index);
+    void LinearGradientComponentInstance::onChildInserted(ComponentInstance::Shared const &childComponentInstance, std::size_t index) {
+        CppComponentInstance::onChildInserted(childComponentInstance, index);
         m_stackNode.insertChild(childComponentInstance->getLocalRootArkUINode(), index);
     }
-
-    void LinearGradientComponentInstance::removeChild(ComponentInstance::Shared childComponentInstance) {
-        CppComponentInstance::removeChild(childComponentInstance);
+    void LinearGradientComponentInstance::onChildRemoved(ComponentInstance::Shared const &childComponentInstance) {
+        CppComponentInstance::onChildRemoved(childComponentInstance);
         m_stackNode.removeChild(childComponentInstance->getLocalRootArkUINode());
     };
 
     LinearGradientStackNode &LinearGradientComponentInstance::getLocalRootArkUINode() { return m_stackNode; }
 
-    void LinearGradientComponentInstance::setProps(facebook::react::Props::Shared props) {
-        CppComponentInstance::setProps(props);
+     void LinearGradientComponentInstance::onPropsChanged(SharedConcreteProps const &props) {
+        CppComponentInstance::onPropsChanged(props);
         auto linearGradientProps = std::dynamic_pointer_cast<const facebook::react::RNLinearGradientProps>(props);
         if (linearGradientProps == nullptr) {
             return;
         }
-        this->colors = linearGradientProps->colors;
-        this->angle = linearGradientProps->angle;
-        this->useAngle = linearGradientProps->useAngle;
-        this->locations = linearGradientProps->locations;
-        this->startPoint = linearGradientProps->startPoint;
-        this->endPoint = linearGradientProps->endPoint;
-        this->angleCenter = linearGradientProps->angleCenter;
+        this->colors = props->colors;
+        this->angle = props->angle;
+        this->useAngle = props->useAngle;
+        this->locations = props->locations;
+        this->startPoint = props->startPoint;
+        this->endPoint = props->endPoint;
+        this->angleCenter = props->angleCenter;
         this->getLinearGradient();
-        for (auto location : linearGradientProps->locations) {
+        for (auto location : props->locations) {
             LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> location: " << location;
         }
-        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angle: " << linearGradientProps->angle;
+        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angle: " << props->angle;
 
-        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> useAngle: " << linearGradientProps->useAngle;
+        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> useAngle: " << props->useAngle;
         LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> startPoint: "
-                  << linearGradientProps->startPoint.x << ", " << linearGradientProps->startPoint.y;
-        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> endPoint: " << linearGradientProps->endPoint.x
-                  << ", " << linearGradientProps->endPoint.y;
+                  << props->startPoint.x << ", " << props->startPoint.y;
+        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> endPoint: " << props->endPoint.x
+                  << ", " << props->endPoint.y;
         LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angleCenter: "
-                  << linearGradientProps->angleCenter.x << ", " << linearGradientProps->angleCenter.y;
+                  << props->angleCenter.x << ", " << props->angleCenter.y;
         this->getLocalRootArkUINode().setLinearGradient(this->colors, this->stops, static_cast<float>(this->angle),
                                                         ARKUI_LINEAR_GRADIENT_DIRECTION_LEFT, false);
     }
