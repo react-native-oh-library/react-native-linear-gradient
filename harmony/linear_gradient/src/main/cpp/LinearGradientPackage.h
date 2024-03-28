@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-
 #ifndef HARMONY_LINEAR_GRADIENT_SRC_MAIN_CPP_LINEARGRADIENTPACKAGE_H
 #define HARMONY_LINEAR_GRADIENT_SRC_MAIN_CPP_LINEARGRADIENTPACKAGE_H
 
@@ -50,8 +49,9 @@ namespace rnoh {
     class LinearGradientPackage : public Package {
     public:
         LinearGradientPackage(Package::Context ctx) : Package(ctx) {}
+    
         ComponentInstanceFactoryDelegate::Shared createComponentInstanceFactoryDelegate() override {
-            return std::make_shared<LinearGradientPackageComponentInstanceFactoryDelegate>();
+            return std::make_shared<LinearGradientPackageComponentInstanceFactoryDelegate>(m_ctx);
         }
 
         std::vector<facebook::react::ComponentDescriptorProvider> createComponentDescriptorProviders() override {

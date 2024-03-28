@@ -10,10 +10,9 @@
 #include "RNOH/CppComponentInstance.h"
 #include "LinearGradientStackNode.h"
 #include "Props.h"
-#include "ShadowNodes.h"
 
 namespace rnoh {
-    class LinearGradientComponentInstance : public CppComponentInstance<facebook::react::RNLinearGradientShadowNode> {
+    class LinearGradientComponentInstance : public CppComponentInstance {
     private:
         LinearGradientStackNode m_stackNode;
         std::vector<facebook::react::SharedColor> colors;
@@ -28,13 +27,14 @@ namespace rnoh {
 
     public:
         LinearGradientComponentInstance(Context context);
-        void onChildInserted(ComponentInstance::Shared const &childComponentInstance, std::size_t index) override;
-    
-        void onChildRemoved(ComponentInstance::Shared const &childComponentInstance) override;
+
+        void insertChild(ComponentInstance::Shared childComponentInstance, std::size_t index) override;
+
+        void removeChild(ComponentInstance::Shared childComponentInstance) override;
 
         LinearGradientStackNode &getLocalRootArkUINode() override;
-    
-        void onPropsChanged(SharedConcreteProps const &props) override;
+
+        void setProps(facebook::react::Props::Shared props) override;
         void getNapiProps(facebook::react::Props::Shared props);
         void getLinearGradient();
         facebook::react::Float computeAngle(facebook::react::Point const &start, facebook::react::Point const &end);
