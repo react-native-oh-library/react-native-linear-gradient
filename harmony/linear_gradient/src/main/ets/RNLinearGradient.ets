@@ -32,7 +32,7 @@ import {
     ColorSegments,
     convertColorSegmentsToString,
     Tag,
-} from 'rnoh'
+} from '@rnoh/react-native-openharmony'
 
 export const LINEAR_GRADIENT_TYPE: string = "RNLinearGradient"
 
