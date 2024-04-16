@@ -48,13 +48,8 @@ namespace rnoh {
                   << ", " << props->endPoint.y;
         LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angleCenter: "
                   << props->angleCenter.x << ", " << props->angleCenter.y;
-        if (useAngle) {
-            this->getLocalRootArkUINode().setLinearGradient(this->colors, this->stops, static_cast<float>(this->angle),
-                                                        ARKUI_LINEAR_GRADIENT_DIRECTION_CUSTOM, false);
-        } else {
-            this->getLocalRootArkUINode().setLinearGradient(this->colors, this->stops, static_cast<float>(this->angle),
-                                                        ARKUI_LINEAR_GRADIENT_DIRECTION_RIGHT, false);
-        }
+		this->getLocalRootArkUINode().setLinearGradient(this->colors, this->stops, static_cast<float>(this->angle),
+													ARKUI_LINEAR_GRADIENT_DIRECTION_CUSTOM, false);
     }
 
     void LinearGradientComponentInstance::getLinearGradient() {
