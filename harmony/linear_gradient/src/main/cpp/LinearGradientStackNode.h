@@ -22,26 +22,24 @@
  * SOFTWARE.
  */
 
-#include <react/renderer/core/PropsParserContext.h>
-#include <react/renderer/core/propsConversions.h>
-#include "Props.h"
+#pragma once
 
-namespace facebook {
-namespace react {
+#include "RNOH/arkui/ArkUINode.h"
+#include "RNOH/arkui/StackNode.h"
+#include <react/renderer/graphics/Color.h>
 
-RNLinearGradientProps::RNLinearGradientProps(
-    const PropsParserContext &context,
-    const RNLinearGradientProps &sourceProps,
-    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
+namespace rnoh {
 
-        angle(convertRawProp(context, rawProps, "angle", sourceProps.angle, {0.0})),
-        useAngle(convertRawProp(context, rawProps, "useAngle", sourceProps.useAngle, {false})),
-        startPoint(convertRawProp(context, rawProps, "startPoint", sourceProps.startPoint, {.x = 0.5, .y = 0})),
-        endPoint(convertRawProp(context, rawProps, "endPoint", sourceProps.endPoint, {.x = 0.5, .y = 1})),
-        colors(convertRawProp(context, rawProps, "colors", sourceProps.colors, {})),
-        locations(convertRawProp(context, rawProps, "locations", sourceProps.locations, {})),
-        angleCenter(convertRawProp(context, rawProps, "angleCenter", sourceProps.angleCenter, {}))
-        {}
+    class LinearGradientStackNode : public ArkUINode {
+    public:
+        LinearGradientStackNode();
 
-} // namespace react
-} // namespace facebook
+        void insertChild(ArkUINode &child, std::size_t index);
+        void removeChild(ArkUINode &child);
+    
+        LinearGradientStackNode &setLinearGradient(std::vector<facebook::react::SharedColor> const &,
+                                                   std::vector<float> const &, float const &,
+                                                   ArkUI_LinearGradientDirection const &, bool const &);
+    };
+
+} // namespace rnoh
