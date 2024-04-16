@@ -3,11 +3,11 @@
   "types": "",
   "devDependencies": {
   },
-  "name": "rnoh-linear-gradient",
+  "name": "@react-native-oh-tpl/react-native-linear-gradient",
   "description": "Native part of react-harmony-linear-gradient",
   "main": "index.ets",
-  "version": "0.0.1",
+  "version": "3.0.0-0.4.2",
   "dependencies": {
-    "rnoh": "file:../rnoh"
+    "@rnoh/react-native-openharmony": "file:../react_native_openharmony",
   }
 }
