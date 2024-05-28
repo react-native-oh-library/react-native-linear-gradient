@@ -1,5 +1,5 @@
-import LinearGradient from 'react-native-linear-gradient/src/RNLinearGradientNativeComponent';
+import LinearGradient from './RNLinearGradientNativeComponent';
 
 export default LinearGradient;
-export {default as LinearGradient} from 'react-native-linear-gradient/src/RNLinearGradientNativeComponent';
-export * from 'react-native-linear-gradient/src/RNLinearGradientNativeComponent';
+export {default as LinearGradient} from './RNLinearGradientNativeComponent';
+export * from './RNLinearGradientNativeComponent';
