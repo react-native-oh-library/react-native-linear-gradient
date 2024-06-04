@@ -37,16 +37,16 @@ namespace rnoh {
         this->angleCenter = props->angleCenter;
         this->getLinearGradient();
         for (auto location : props->locations) {
-            LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> location: " << location;
+            DLOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> location: " << location;
         }
-        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angle: " << props->angle;
+        DLOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angle: " << props->angle;
 
-        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> useAngle: " << props->useAngle;
-        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> startPoint: "
+        DLOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> useAngle: " << props->useAngle;
+        DLOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> startPoint: "
                   << props->startPoint.x << ", " << props->startPoint.y;
-        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> endPoint: " << props->endPoint.x
+        DLOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> endPoint: " << props->endPoint.x
                   << ", " << props->endPoint.y;
-        LOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angleCenter: "
+        DLOG(INFO) << "[clx] <LinearGradientComponentInstance::setProps> angleCenter: "
                   << props->angleCenter.x << ", " << props->angleCenter.y;
 		this->getLocalRootArkUINode().setLinearGradient(this->colors, this->stops, static_cast<float>(this->angle),
 													ARKUI_LINEAR_GRADIENT_DIRECTION_CUSTOM, false);
@@ -68,17 +68,30 @@ namespace rnoh {
         if (this->locations.size() != 0) {
             for (int index = 0; index < this->colors.size(); index++) {
                 this->stops.push_back(static_cast<float>(this->locations[index]));
-                LOG(INFO) << "[clx] <RNLinearGradient::getLinearGradient> stops:" << std::to_string(stops[index]);
+                DLOG(INFO) << "[clx] <RNLinearGradient::getLinearGradient> stops:" << std::to_string(stops[index]);
             }
         } else {
-            for (int index = 0; index < this->colors.size(); index++) {
-                if (this->colors.size() == 1)
-                    this->stops.push_back(0);
-                this->stops.push_back(index * 1.0 / (this->colors.size() - 1));
-                LOG(INFO) << "[clx] <RNLinearGradient::getLinearGradient> stops:" << std::to_string(stops[index]);
+            for (int index = 1; index <= this->colors.size(); index++) {
+                if (this->colors.size() == 1) {
+                    this->stops.push_back(1);
+                } else {
+                    if (index == 1) {
+                        this->stops.push_back(this->startPoint.y);
+                    }
+                    if (index == this->colors.size()) {
+                        this->stops.push_back(this->endPoint.y);
+                    }
+                    if (index > 1 && index < this->colors.size()) {
+                        float pointMinY = this->startPoint.y < this->endPoint.y ? this->startPoint.y : this->endPoint.y;
+                        pointMinY = pointMinY > 1.0 ? 1.0 : pointMinY;
+                        float pointMaxY = this->startPoint.y > this->endPoint.y ? this->startPoint.y : this->endPoint.y;
+                        pointMaxY = pointMaxY > 1.0 ? 1.0 : pointMaxY;
+                        this->stops.push_back(pointMinY + (index - 1) * 1.0 / (this->colors.size() - 1) * (pointMaxY - pointMinY));
+                    }
+                }
             }
         }
-        LOG(INFO) << "[clx] <RNLinearGradient::getLinearGradient> angle:" << std::to_string(this->angle);
+        DLOG(INFO) << "[clx] <RNLinearGradient::getLinearGradient> angle:" << std::to_string(this->angle);
         return;
     }
 
