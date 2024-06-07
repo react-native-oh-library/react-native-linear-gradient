@@ -71,28 +71,62 @@ namespace rnoh {
                 DLOG(INFO) << "[clx] <RNLinearGradient::getLinearGradient> stops:" << std::to_string(stops[index]);
             }
         } else {
-            for (int index = 1; index <= this->colors.size(); index++) {
-                if (this->colors.size() == 1) {
-                    this->stops.push_back(1);
-                } else {
-                    if (index == 1) {
-                        this->stops.push_back(this->startPoint.y);
-                    }
-                    if (index == this->colors.size()) {
-                        this->stops.push_back(this->endPoint.y);
-                    }
-                    if (index > 1 && index < this->colors.size()) {
-                        float pointMinY = this->startPoint.y < this->endPoint.y ? this->startPoint.y : this->endPoint.y;
-                        pointMinY = pointMinY > 1.0 ? 1.0 : pointMinY;
-                        float pointMaxY = this->startPoint.y > this->endPoint.y ? this->startPoint.y : this->endPoint.y;
-                        pointMaxY = pointMaxY > 1.0 ? 1.0 : pointMaxY;
-                        this->stops.push_back(pointMinY + (index - 1) * 1.0 / (this->colors.size() - 1) * (pointMaxY - pointMinY));
-                    }
-                }
-            }
+            this->computeStops();
         }
         DLOG(INFO) << "[clx] <RNLinearGradient::getLinearGradient> angle:" << std::to_string(this->angle);
         return;
+    }
+
+    void LinearGradientComponentInstance::computeStops() {
+        float startPointX = this->startPoint.x > 0 ? this->startPoint.x : 0.0;
+        float startPointY = this->startPoint.y > 0 ? this->startPoint.y : 0.0;
+        float endPointX = this->endPoint.x > 0 ? this->endPoint.x : 0.0;
+        float endPointY = this->endPoint.y > 0 ? this->endPoint.y : 0.0;
+        float pointMax = 0.0;
+        float pointMin = 0.0;
+        if (startPointX == endPointX) {
+            pointMin = startPointY < endPointY ? startPointY : endPointY;
+            pointMin = pointMin > 1.0 ? 1.0 : pointMin;
+            pointMax = startPointY > endPointY ? startPointY : endPointY;
+            pointMax = pointMax > 1.0 ? 1.0 : pointMax;
+        } else if (startPointY == endPointY) {
+            pointMin = startPointX < endPointX ? startPointX : endPointX;
+            pointMin = pointMin > 1.0 ? 1.0 : pointMin;
+            pointMax = startPointX > endPointX ? startPointX : endPointX;
+            pointMax = pointMax > 1.0 ? 1.0 : pointMax;
+        } else {
+            float pointMinY = startPointY < endPointY ? startPointY : endPointY;
+            pointMinY = pointMinY > 1.0 ? 1.0 : pointMinY;
+            float pointMaxY = startPointY > endPointY ? startPointY : endPointY;
+            pointMaxY = pointMaxY > 1.0 ? 1.0 : pointMaxY;
+            float pointMinX = startPointX < endPointX ? startPointX : endPointX;
+            pointMinX = pointMinX > 1.0 ? 1.0 : pointMinX;
+            float pointMaxX = startPointX > endPointX ? startPointX : endPointX;
+            pointMaxX = pointMaxX > 1.0 ? 1.0 : pointMaxX;
+            if ((pointMaxY - pointMinY) < (pointMaxX - pointMinX)) {
+                pointMin = pointMinX;
+                pointMax = pointMaxX;
+            } else {
+                pointMin = pointMinY;
+                pointMax = pointMaxY;
+            }
+        }
+        for (int index = 1; index <= this->colors.size(); index++) {
+            if (this->colors.size() == 1) {
+                this->stops.push_back(1);
+            } else {
+                if (index == 1) {
+                    this->stops.push_back(pointMin);
+                }
+                if (index == this->colors.size()) {
+                    this->stops.push_back(pointMax);
+                }
+                if (index > 1 && index < this->colors.size()) {
+                    this->stops.push_back(pointMin +
+                                          (index - 1) * 1.0 / (this->colors.size() - 1) * (pointMax - pointMin));
+                }
+            }
+        }
     }
 
     facebook::react::Float LinearGradientComponentInstance::computeAngle(facebook::react::Point const &start,
