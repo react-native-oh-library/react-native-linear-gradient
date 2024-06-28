@@ -55,6 +55,7 @@ namespace rnoh {
         void onPropsChanged(SharedConcreteProps const &props) override;
         void getNapiProps(facebook::react::Props::Shared props);
         void getLinearGradient();
+        void computeStops();
         facebook::react::Float computeAngle(facebook::react::Point const &start, facebook::react::Point const &end);
     };
 } // namespace rnoh

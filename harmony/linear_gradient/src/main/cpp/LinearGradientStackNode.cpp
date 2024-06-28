@@ -1,5 +1,5 @@
 #include "LinearGradientStackNode.h"
-#include "RNOH/arkui/NativeNodeApi.h"
+#include "NativeNodeApi.h"
 #include <memory>
 #include "glog/logging.h"
 

@@ -25,7 +25,6 @@
 #pragma once
 
 #include "RNOH/arkui/ArkUINode.h"
-#include "RNOH/arkui/StackNode.h"
 #include <react/renderer/graphics/Color.h>
 
 namespace rnoh {
