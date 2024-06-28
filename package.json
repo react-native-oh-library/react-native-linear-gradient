@@ -1,6 +1,6 @@
 {
   "name": "@react-native-oh-tpl/react-native-linear-gradient",
-  "version": "3.0.0-0.4.2",
+  "version": "3.0.0-0.4.5",
   "description": "A <LinearGradient> element for React Native",
   "main": "index.js",
   "types": "index.d.ts",
@@ -34,7 +34,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "react-native-linear-gradient": "3.0.0-alpha.1"
+    "react-native-linear-gradient": "2.8.3"
   },
   "devDependencies": {
     "@types/react-native": "^0.70.14",
