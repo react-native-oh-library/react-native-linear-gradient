@@ -5,7 +5,6 @@
 // please include "napi/native_api.h".
 
 #include "LinearGradientComponentInstance.h"
-#include <glog/logging.h>
 
 namespace rnoh {
     LinearGradientComponentInstance::LinearGradientComponentInstance(Context context)

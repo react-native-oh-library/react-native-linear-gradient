@@ -1,7 +1,5 @@
 #include "LinearGradientStackNode.h"
 #include "NativeNodeApi.h"
-#include <memory>
-#include "glog/logging.h"
 
 namespace rnoh {
     LinearGradientStackNode::LinearGradientStackNode()
