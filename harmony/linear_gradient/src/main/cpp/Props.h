@@ -30,7 +30,6 @@
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 #include <vector>
-#include <boost/json.hpp>
 
 namespace facebook {
 namespace react {
