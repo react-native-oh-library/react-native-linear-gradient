@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (C) 2023 Huawei Device Co., Ltd.
+ * Copyright (C) 2024 Huawei Device Co., Ltd.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,20 +25,19 @@
 #pragma once
 
 #include "RNOH/arkui/ArkUINode.h"
+#include "RNOH/arkui/StackNode.h"
 #include <react/renderer/graphics/Color.h>
 
 namespace rnoh {
+class LinearGradientStackNode : public ArkUINode {
+public:
+    LinearGradientStackNode();
 
-    class LinearGradientStackNode : public ArkUINode {
-    public:
-        LinearGradientStackNode();
+    void insertChild(ArkUINode &child, std::size_t index);
+    void removeChild(ArkUINode &child);
 
-        void insertChild(ArkUINode &child, std::size_t index);
-        void removeChild(ArkUINode &child);
-    
-        LinearGradientStackNode &setLinearGradient(std::vector<facebook::react::SharedColor> const &,
-                                                   std::vector<float> const &, float const &,
-                                                   ArkUI_LinearGradientDirection const &, bool const &);
-    };
-
+    LinearGradientStackNode &setLinearGradient(std::vector<facebook::react::SharedColor> const &,
+                                               std::vector<float> const &, float const &,
+                                               ArkUI_LinearGradientDirection const &, bool const &);
+};
 } // namespace rnoh

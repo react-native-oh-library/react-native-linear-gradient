@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (C) 2023 Huawei Device Co., Ltd.
+ * Copyright (C) 2024 Huawei Device Co., Ltd.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,55 +22,24 @@
  * SOFTWARE.
  */
 
+#pragma once
 
-#ifndef HARMONY_LINEAR_GRADIENT_SRC_MAIN_CPP_LINEARGRADIENTPACKAGE_H
-#define HARMONY_LINEAR_GRADIENT_SRC_MAIN_CPP_LINEARGRADIENTPACKAGE_H
-
-#include "RNOH/Package.h"
-#include "RNOHCorePackage/ComponentInstances/ViewComponentInstance.h"
-#include "ComponentDescriptors.h"
-#include "LinearGradientJSIBinder.h"
-#include "LinearGradientNapiBinder.h"
 #include "LinearGradientComponentInstance.h"
+#include "RNOH/generated/BaseReactNativeLinearGradientPackage.h"
 
 namespace rnoh {
 
-    class LinearGradientPackageComponentInstanceFactoryDelegate : public ComponentInstanceFactoryDelegate {
-    public:
-        using ComponentInstanceFactoryDelegate::ComponentInstanceFactoryDelegate;
+class LinearGradientPackage : public BaseReactNativeLinearGradientPackage {
+    using Super = BaseReactNativeLinearGradientPackage;
 
-        ComponentInstance::Shared create(ComponentInstance::Context ctx) override {
-            if (ctx.componentName == "RNLinearGradient") {
-                return std::make_shared<LinearGradientComponentInstance>(std::move(ctx));
-            }
-            return nullptr;
+public:
+    LinearGradientPackage(Package::Context ctx) : Super(ctx) {}
+
+    ComponentInstance::Shared createComponentInstance(const ComponentInstance::Context &ctx) {
+        if (ctx.componentName == "RNLinearGradient") {
+            return std::make_shared<LinearGradientComponentInstance>(ctx);
         }
+        return nullptr;
     };
-
-    class LinearGradientPackage : public Package {
-    public:
-        LinearGradientPackage(Package::Context ctx) : Package(ctx) {}
-        ComponentInstanceFactoryDelegate::Shared createComponentInstanceFactoryDelegate() override {
-            return std::make_shared<LinearGradientPackageComponentInstanceFactoryDelegate>();
-        }
-
-        std::vector<facebook::react::ComponentDescriptorProvider> createComponentDescriptorProviders() override {
-            return {facebook::react::concreteComponentDescriptorProvider<
-                facebook::react::RNLinearGradientComponentDescriptor>()};
-        }
-
-        ComponentJSIBinderByString createComponentJSIBinderByName() override {
-            return {
-                {"RNLinearGradient", std::make_shared<LinearGradientJSIBinder>()},
-
-            };
-        }
-
-        ComponentNapiBinderByString createComponentNapiBinderByName() override {
-            return {
-                {"RNLinearGradient", std::make_shared<LinearGradientNapiBinder>()},
-            };
-        }
-    };
+};
 } // namespace rnoh
-#endif

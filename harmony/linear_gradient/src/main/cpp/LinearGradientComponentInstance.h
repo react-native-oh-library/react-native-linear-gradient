@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (C) 2023 Huawei Device Co., Ltd.
+ * Copyright (C) 2024 Huawei Device Co., Ltd.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,42 +22,41 @@
  * SOFTWARE.
  */
 
-#ifndef HARMONY_LINEARGRADIENTCOMPONENTINSTANCE_H
-#define HARMONY_LINEARGRADIENTCOMPONENTINSTANCE_H
+#pragma once
 
 #include "RNOH/CppComponentInstance.h"
 #include "LinearGradientStackNode.h"
-#include "Props.h"
-#include "ShadowNodes.h"
+#include "generated/react/renderer/components/react_native_linear_gradient/Props.h"
+#include "generated/RNOH/generated/components/BaseRNLinearGradientComponentInstance.h"
+
 
 namespace rnoh {
-    class LinearGradientComponentInstance : public CppComponentInstance<facebook::react::RNLinearGradientShadowNode> {
-    private:
-        LinearGradientStackNode m_stackNode;
-        std::vector<facebook::react::SharedColor> colors;
-        facebook::react::Float angle;
-        bool useAngle;
-        std::vector<facebook::react::Float> locations;
-        facebook::react::Point startPoint;
-        facebook::react::Point endPoint;
-        facebook::react::Point angleCenter;
-        std::vector<float> stops;
-        
+class LinearGradientComponentInstance : public BaseRNLinearGradientComponentInstance {
+    using super = BaseRNLinearGradientComponentInstance;
 
-    public:
-        LinearGradientComponentInstance(Context context);
-        void onChildInserted(ComponentInstance::Shared const &childComponentInstance, std::size_t index) override;
-    
-        void onChildRemoved(ComponentInstance::Shared const &childComponentInstance) override;
+private:
+    LinearGradientStackNode m_stackNode;
+    std::vector<facebook::react::SharedColor> m_colors;
+    facebook::react::Float m_angle;
+    bool m_useAngle;
+    std::vector<facebook::react::Float> m_locations;
+    facebook::react::Point m_startPoint;
+    facebook::react::Point m_endPoint;
+    facebook::react::Point m_angleCenter;
+    std::vector<float> m_stops;
+    void getLinearGradient();
+    void computeStops();
 
-        LinearGradientStackNode &getLocalRootArkUINode() override;
-    
-        void onPropsChanged(SharedConcreteProps const &props) override;
-        void getNapiProps(facebook::react::Props::Shared props);
-        void getLinearGradient();
-        void computeStops();
-        facebook::react::Float computeAngle(facebook::react::Point const &start, facebook::react::Point const &end);
-    };
+public:
+    LinearGradientComponentInstance(Context context);
+
+    void onChildInserted(ComponentInstance::Shared const &childComponentInstance, std::size_t index) override;
+    void onChildRemoved(ComponentInstance::Shared const &childComponentInstance) override;
+
+    LinearGradientStackNode &getLocalRootArkUINode() override;
+
+    void onPropsChanged(SharedConcreteProps const &props) override;
+
+    facebook::react::Float computeAngle(facebook::react::Point const &start, facebook::react::Point const &end);
+};
 } // namespace rnoh
-
-#endif //HARMONY_LINEARGRADIENTCOMPONENTINSTANCE_H

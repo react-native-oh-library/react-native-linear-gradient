@@ -1,10 +1,10 @@
 {
-  "license": "ISC",
+  "license": "MIT",
   "types": "",
   "devDependencies": {
   },
   "name": "@react-native-oh-tpl/react-native-linear-gradient",
-  "description": "Native part of react-harmony-linear-gradient",
+  "description": "react-native-linear-gradient for RNOH",
   "main": "index.ets",
   "version": "3.0.0-0.4.6",
   "dependencies": {
